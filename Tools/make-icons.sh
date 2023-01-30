@@ -52,7 +52,7 @@ tmpdir=`mktemp -d 2>/dev/null || mktemp -d -t 'icontmp'`
 #
 for i in 720 480 240
 do
-   cp "$3" "$tmpdir/tmp.svg"
+   cp "$1" "$tmpdir/tmp.svg"
    cairosvg -f png -o "$tmpdir/$i-white.png" --output-width $i --output-height $i "$tmpdir/tmp.svg"
    rm "$tmpdir/tmp.svg"
 done
