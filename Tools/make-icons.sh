@@ -25,7 +25,7 @@ tmpdir=`mktemp -d 2>/dev/null || mktemp -d -t 'icontmp'`
 #     # Above is the imagemagick command to render an svg to png. Unfortunately, its support for SVGs
 #     # with CSS isn't very good (with rsvg and even moreso the built in renderer) so we use cairosvg.
 #     # This can be installed with:
-#     #    pip install cairosvg==1.0.22 # Version 2 doesn't support python 2
+#     #    pip install cairosvg
 #     #    pip install tinycss
 #     #    pip install cssselect # These are necessary for CSS support
 #     # You'll also need xmlstarlet from your favourite package manager
@@ -53,10 +53,8 @@ tmpdir=`mktemp -d 2>/dev/null || mktemp -d -t 'icontmp'`
 for i in 720 480 240
 do
    cp "$3" "$tmpdir/tmp.svg"
-   xmlstarlet ed -N x="http://www.w3.org/2000/svg" --insert "/x:svg" --type attr -n width -v $i "$tmpdir/tmp.svg" > "$tmpdir/tmp2.svg"
-   xmlstarlet ed -N x="http://www.w3.org/2000/svg" --insert "/x:svg" --type attr -n height -v $i "$tmpdir/tmp2.svg" > "$tmpdir/tmp3.svg"
-   cairosvg -f png -o "$tmpdir/$i-white.png"  "$tmpdir/tmp3.svg"
-   rm "$tmpdir/tmp.svg" "$tmpdir/tmp2.svg" "$tmpdir/tmp3.svg"
+   cairosvg -f png -o "$tmpdir/$i-white.png" --output-width $i --output-height $i "$tmpdir/tmp.svg"
+   rm "$tmpdir/tmp.svg"
 done
 
 # cp "$tmpdir/240.png" "Riot/Assets/Images.xcassets/launch_screen_logo.imageset/launch_screen_logo.png"
