@@ -8,9 +8,9 @@
 # 
 # Modified: Eric Xu  Date: 2022/12/29 17:33
 
-if [ $# != 3 ]
+if [ $# != 1 ]
 then
-    echo "Usage: $0 <logo svg file> <round-logo svg file> <white-logo svg file>"
+    echo "Usage: $0 <white-logo svg file>"
     exit
 fi
 
