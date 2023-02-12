@@ -8,9 +8,9 @@
 # 
 # Modified: Eric Xu  Date: 2023/1/31
 
-if [ $# != 2 ]
+if [ $# != 3 ]
 then
-    echo "Usage: $0 <white-logo svg> <app icon svg>"
+    echo "Usage: $0 <white-logo svg> <app icon svg> <round-logo svg>"
     exit
 fi
 
@@ -64,6 +64,13 @@ do
    rm "$tmpdir/tmp.svg"
 done
 
+for i in 120 240 360
+do
+   cp "$3" "$tmpdir/tmp.svg"
+   cairosvg -f png -o "$tmpdir/$i-round.png" --output-width $i --output-height $i "$tmpdir/tmp.svg"
+   rm "$tmpdir/tmp.svg"
+done
+
 # launch_screen_logo
 cp "$tmpdir/240-white.png" "Riot/Assets/Images.xcassets/launch_screen_logo.imageset/launch_screen_logo.png"
 cp "$tmpdir/480-white.png" "Riot/Assets/Images.xcassets/launch_screen_logo.imageset/launch_screen_logo@2x.png"
@@ -92,5 +99,10 @@ cp "$tmpdir/180-appicon.png" "Riot/Assets/SharedImages.xcassets/AppIcon.appicons
 cp "$tmpdir/40-appicon.png" "Riot/Assets/Images.xcassets/Call/callkit_icon.imageset/callkit_icon.png"
 cp "$tmpdir/80-appicon.png" "Riot/Assets/Images.xcassets/Call/callkit_icon.imageset/callkit_icon@2x.png"
 cp "$tmpdir/120-appicon.png" "Riot/Assets/Images.xcassets/Call/callkit_icon.imageset/callkit_icon@3x.png"
+
+# Element Symbol
+cp "$tmpdir/120-round.png" "Riot/Assets/Images.xcassets/Common/app_symbol.imageset/Element Symbol.png"
+cp "$tmpdir/240-round.png" "Riot/Assets/Images.xcassets/Common/app_symbol.imageset/Element Symbol@2x.png"
+cp "$tmpdir/360-round.png" "Riot/Assets/Images.xcassets/Common/app_symbol.imageset/Element Symbol@3x.png"
 
 rm -r "$tmpdir"
