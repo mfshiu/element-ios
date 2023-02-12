@@ -88,5 +88,9 @@ cp "$tmpdir/80-appicon.png" "Riot/Assets/SharedImages.xcassets/AppIcon.appiconse
 cp "$tmpdir/120-appicon.png" "Riot/Assets/SharedImages.xcassets/AppIcon.appiconset/AppIcon~iPhone-40@3x.png"
 cp "$tmpdir/120-appicon.png" "Riot/Assets/SharedImages.xcassets/AppIcon.appiconset/AppIcon~iPhone-60@2x.png"
 cp "$tmpdir/180-appicon.png" "Riot/Assets/SharedImages.xcassets/AppIcon.appiconset/AppIcon~iPhone-60@3x.png"
+#
+cp "$tmpdir/40-appicon.png" "Riot/Assets/Images.xcassets/Call/callkit_icon.imageset/callkit_icon.png"
+cp "$tmpdir/80-appicon.png" "Riot/Assets/Images.xcassets/Call/callkit_icon.imageset/callkit_icon@2x.png"
+cp "$tmpdir/120-appicon.png" "Riot/Assets/Images.xcassets/Call/callkit_icon.imageset/callkit_icon@3x.png"
 
 rm -r "$tmpdir"
