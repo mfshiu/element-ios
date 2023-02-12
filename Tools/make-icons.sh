@@ -8,7 +8,7 @@
 # 
 # Modified: Eric Xu  Date: 2023/1/31
 
-if [ $# != 1 ]
+if [ $# != 2 ]
 then
     echo "Usage: $0 <white-logo svg> <app icon svg>"
     exit
