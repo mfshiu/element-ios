@@ -10,7 +10,7 @@
 
 if [ $# != 1 ]
 then
-    echo "Usage: $0 <white-logo svg file>"
+    echo "Usage: $0 <white-logo svg> <app icon svg>"
     exit
 fi
 
@@ -41,14 +41,14 @@ tmpdir=`mktemp -d 2>/dev/null || mktemp -d -t 'icontmp'`
 #     rm "$tmpdir/tmp.svg" "$tmpdir/tmp2.svg" "$tmpdir/tmp3.svg"
 # done
 
-#for i in 192 144 96 72 48
-#do
+# for i in 192 144 96 72 48
+# do
 #    cp "$2" "$tmpdir/tmp.svg"
 #    xmlstarlet ed -N x="http://www.w3.org/2000/svg" --insert "/x:svg" --type attr -n width -v $i "$tmpdir/tmp.svg" > "$tmpdir/tmp2.svg"
 #    xmlstarlet ed -N x="http://www.w3.org/2000/svg" --insert "/x:svg" --type attr -n height -v $i "$tmpdir/tmp2.svg" > "$tmpdir/tmp3.svg"
 #    cairosvg -f png -o "$tmpdir/$i-round.png"  "$tmpdir/tmp3.svg"
 #    rm "$tmpdir/tmp.svg" "$tmpdir/tmp2.svg" "$tmpdir/tmp3.svg"
-#done
+# done
 #
 for i in 720 480 240
 do
@@ -57,18 +57,36 @@ do
    rm "$tmpdir/tmp.svg"
 done
 
-# cp "$tmpdir/240.png" "Riot/Assets/Images.xcassets/launch_screen_logo.imageset/launch_screen_logo.png"
-# cp "$tmpdir/480.png" "Riot/Assets/Images.xcassets/launch_screen_logo.imageset/launch_screen_logo@2x.png"
-# cp "$tmpdir/720.png" "Riot/Assets/Images.xcassets/launch_screen_logo.imageset/launch_screen_logo@3x.png"
+for i in 20 29 40 58 60 76 80 87 120 152 167 180 1024
+do
+   cp "$2" "$tmpdir/tmp.svg"
+   cairosvg -f png -o "$tmpdir/$i-appicon.png" --output-width $i --output-height $i "$tmpdir/tmp.svg"
+   rm "$tmpdir/tmp.svg"
+done
 
-#cp "$tmpdir/48-round.png" "vector-app/src/main/res/mipmap-mdpi/ic_launcher_round.png"
-#cp "$tmpdir/72-round.png" "vector-app/src/main/res/mipmap-hdpi/ic_launcher_round.png"
-#cp "$tmpdir/96-round.png" "vector-app/src/main/res/mipmap-xhdpi/ic_launcher_round.png"
-#cp "$tmpdir/144-round.png" "vector-app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png"
-#cp "$tmpdir/192-round.png" "vector-app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png"
-#
+# launch_screen_logo
 cp "$tmpdir/240-white.png" "Riot/Assets/Images.xcassets/launch_screen_logo.imageset/launch_screen_logo.png"
 cp "$tmpdir/480-white.png" "Riot/Assets/Images.xcassets/launch_screen_logo.imageset/launch_screen_logo@2x.png"
 cp "$tmpdir/720-white.png" "Riot/Assets/Images.xcassets/launch_screen_logo.imageset/launch_screen_logo@3x.png"
+
+# app icon
+cp "$tmpdir/1024-appicon.png" "Riot/Assets/SharedImages.xcassets/AppIcon.appiconset/AppIcon~iOS-Marketing-1024@1x.png"
+cp "$tmpdir/20-appicon.png" "Riot/Assets/SharedImages.xcassets/AppIcon.appiconset/AppIcon~iPad-20@1x.png"
+cp "$tmpdir/40-appicon.png" "Riot/Assets/SharedImages.xcassets/AppIcon.appiconset/AppIcon~iPad-20@2x.png"
+cp "$tmpdir/29-appicon.png" "Riot/Assets/SharedImages.xcassets/AppIcon.appiconset/AppIcon~iPad-29@1x.png"
+cp "$tmpdir/58-appicon.png" "Riot/Assets/SharedImages.xcassets/AppIcon.appiconset/AppIcon~iPad-29@2x.png"
+cp "$tmpdir/40-appicon.png" "Riot/Assets/SharedImages.xcassets/AppIcon.appiconset/AppIcon~iPad-40@1x.png"
+cp "$tmpdir/80-appicon.png" "Riot/Assets/SharedImages.xcassets/AppIcon.appiconset/AppIcon~iPad-40@2x.png"
+cp "$tmpdir/76-appicon.png" "Riot/Assets/SharedImages.xcassets/AppIcon.appiconset/AppIcon~iPad-76@1x.png"
+cp "$tmpdir/152-appicon.png" "Riot/Assets/SharedImages.xcassets/AppIcon.appiconset/AppIcon~iPad-76@2x.png"
+cp "$tmpdir/167-appicon.png" "Riot/Assets/SharedImages.xcassets/AppIcon.appiconset/AppIcon~iPad-83.5@2x.png"
+cp "$tmpdir/40-appicon.png" "Riot/Assets/SharedImages.xcassets/AppIcon.appiconset/AppIcon~iPhone-20@2x.png"
+cp "$tmpdir/60-appicon.png" "Riot/Assets/SharedImages.xcassets/AppIcon.appiconset/AppIcon~iPhone-20@3x.png"
+cp "$tmpdir/58-appicon.png" "Riot/Assets/SharedImages.xcassets/AppIcon.appiconset/AppIcon~iPhone-29@2x.png"
+cp "$tmpdir/87-appicon.png" "Riot/Assets/SharedImages.xcassets/AppIcon.appiconset/AppIcon~iPhone-29@3x.png"
+cp "$tmpdir/80-appicon.png" "Riot/Assets/SharedImages.xcassets/AppIcon.appiconset/AppIcon~iPhone-40@2x.png"
+cp "$tmpdir/120-appicon.png" "Riot/Assets/SharedImages.xcassets/AppIcon.appiconset/AppIcon~iPhone-40@3x.png"
+cp "$tmpdir/120-appicon.png" "Riot/Assets/SharedImages.xcassets/AppIcon.appiconset/AppIcon~iPhone-60@2x.png"
+cp "$tmpdir/180-appicon.png" "Riot/Assets/SharedImages.xcassets/AppIcon.appiconset/AppIcon~iPhone-60@3x.png"
 
 rm -r "$tmpdir"
